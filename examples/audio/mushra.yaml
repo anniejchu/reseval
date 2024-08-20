@@ -1,5 +1,5 @@
 # A name to give to this evaluation configuration
-name: mushra-audio-example
+name: mushra-audio-example-1
 
 # The type of test to run. One of [ab, abx, mos, mushra, wordselect].
 test: mushra
