@@ -126,12 +126,15 @@ export default function TaskPage({
             throw new Error(`Test type ${config.test} is not recognized`);
     }
 
+    // Dynamically generate instructions based on the current file
+    const instructions = config.survey_instructions_template.replace('{{filename}}', file);
+
+
     // Render
     return (
         <div className='container'>
             <Markdown>
-                {`**Question ${index + 1} of ${files.length}**\n` +
-                config.survey_instructions}
+                {`**Question ${index + 1} of ${files.length}**\n` + instructions}
             </Markdown>
             <MediaContext.Provider value={value}>
                 {test}
