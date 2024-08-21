@@ -1,11 +1,12 @@
 import Chance from 'chance';
-import React, {createRef, useMemo, useState} from 'react';
+import React, {createRef, useRef, useMemo, useState} from 'react';
 
 import MediaSliderGroup from '../components/MediaSliderGroup';
 
 import '../css/components.css';
 
 import Button from '../components/Button';
+import Media from "../components/Media";
 
 
 /******************************************************************************
@@ -16,13 +17,15 @@ import Button from '../components/Button';
 // Random number generator
 const chance = new Chance();
 
-
 /******************************************************************************
  MUSHRA test
  ******************************************************************************/
 
 
 export default function MUSHRA({file, conditions, setResponse, onClick}) {
+    const refX = useRef();
+    const [XEnded, setXEnded] = useState(false);
+
     /* Render a MUSHRA evaluation task */
     // Create a ref for each media object
     const refs = useMemo(
@@ -30,6 +33,7 @@ export default function MUSHRA({file, conditions, setResponse, onClick}) {
 
     // Whether file has ended
     const [endeds, setEndeds] = useState(Array(conditions.length).fill(false));
+    const [audioEnded, setAudioEnded] = useState(false);
 
     // Whether sliders have been touched
     const [toucheds, setToucheds] = useState(
@@ -57,6 +61,7 @@ export default function MUSHRA({file, conditions, setResponse, onClick}) {
         // Reset scores
         setScores(Array(conditions.length).fill(50));
 
+        setAudioEnded(false);
         // Get a new permutation
         setPermutation(chance.shuffle([...Array(conditions.length).keys()]));
     }
@@ -69,6 +74,11 @@ export default function MUSHRA({file, conditions, setResponse, onClick}) {
     // Render
     return (
         <>
+            <Media
+                reference={refX}
+                onEnded={() => setXEnded(true)}
+                src={'reference/' + file}
+            />
             <MediaSliderGroup
                 file={file}
                 conditions={permuted_conditions}
