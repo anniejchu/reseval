@@ -86,7 +86,7 @@ function MediaSlider({
                     value={scores[index]}
                     defaultValue={50}
                     startPoint={50}
-                    marks={{0: 0, 25: 25, 50: 50, 75: 75, 100: 100}}
+                    marks={{0:"-2 (wrong way)", 25:"-1", 50:"0 (no change)", 75:"+1", 100:"+2 (right way)"}}
                     vertical={true}
                     disabled={!endeds[index]}
                     onChange={onChange}

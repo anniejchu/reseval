@@ -1,5 +1,5 @@
 # A name to give to this evaluation configuration
-name: mushra-audio-example-9
+name: mushra-audio-example-50
 
 # The type of test to run. One of [ab, abx, mos, mushra, wordselect].
 test: mushra
@@ -128,16 +128,32 @@ listening_test:
   # Number of allowed retries before the participant fails the test
   retries: 2
 
-# Instructions presented to the participant during evaluation
+# # Instructions presented to the participant during evaluation
 # survey_instructions: "
 #   ## **Instructions** \nListen to all audio files. Then, move the sliders
 #   to rate the quality of each audio file from 0 (worst) to 100 (best). The
 #   higher-quality audio files are the ones that are more natural sounding, or
 #   have fewer audio artifacts (e.g., clicks, pops, or background noise)."
-
-# Instructions presented to the participant during evaluation
 survey_instructions_template: "
-  ## **Instructions** \nListen to the audio file: **{{filename}}**. Then, move the sliders to rate the quality of the audio from 0 (worst) to 100 (best). The higher-quality audio files are the ones that are more natural sounding, or have fewer audio artifacts (e.g., clicks, pops, or background noise)."
+  ## **Instructions** \nBegin by listening to the reference audio file at the top, and then proceed to listen to each audio file below.
+  
+  \n
+  
+  For each audio clip below, adjust the slider to indicate how well it matches this statement: 
+   
+  \n
+  
+  `This audio sounds more` **{{filename}}** `than the reference audio`
+   
+  \n
+  
+  checking back and forth with the reference file to assist your decision.  
+  The slider ranges from -2 to +2, where -2 indicates the audio has changed in the wrong direction, 
+  0 indicates no noticeable change or a neutral effect, and +2 indicates a change in the right direction, clearly exhibiting the characteristic.
+  
+  \n
+  
+  Once you have listened to every file and have made your selections, select the 'Next' button at the bottom of the page (you may need to scroll)."
 
 # Questions presented to the participant after evaluation
 followup_questions:

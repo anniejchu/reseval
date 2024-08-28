@@ -1,16 +1,12 @@
 import React, {createContext, useMemo, useState} from 'react';
-
 import AB from '../test/AB';
 import ABX from '../test/ABX';
 import MOS from '../test/MOS';
 import MUSHRA from '../test/MUSHRA';
 import WordSelect from '../test/WordSelect';
 import Markdown from '../components/Markdown';
-
 import config from '../json/config.json';
-
 import '../css/components.css';
-
 
 /******************************************************************************
  Constants
@@ -25,7 +21,6 @@ export const MediaContext = createContext({
     mediaRef: '',
     setMediaRef: () => {}
 });
-
 
 /******************************************************************************
  Prescreening survey
@@ -62,8 +57,10 @@ export default function TaskPage({
     // Get current file to evaluate
     const file = files[index];
 
-    function onClick() {
+    // Extract the filename stem
+    const filenameStem = file.replace(/\.[^/.]+$/, '');
 
+    function onClick() {
         // Upload response
         fetch(url + '/api/responses', {
             method: 'post',
@@ -71,7 +68,7 @@ export default function TaskPage({
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                'Stem': file.replace(/\.[^/.]+$/, ''),
+                'Stem': filenameStem,
                 'Participant': participant,
                 'OrderAsked': index,
                 'Response': response
@@ -127,8 +124,7 @@ export default function TaskPage({
     }
 
     // Dynamically generate instructions based on the current file
-    const instructions = config.survey_instructions_template.replace('{{filename}}', file);
-
+    const instructions = config.survey_instructions_template.replace('{{filename}}', filenameStem);
 
     // Render
     return (
